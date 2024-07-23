@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   User,
+  //UserCredential,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
@@ -15,16 +16,16 @@ export const useAuth = () => {
     return unsubscribe;
   }, []);
 
-  const login = (email: string, password: string) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const login = async (email: string, password: string): Promise<void> => {
+    await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signup = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email: string, password: string): Promise<void> => {
+    await createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async (): Promise<void> => {
+    await signOut(auth);
   };
 
   return { user, login, signup, logout };
